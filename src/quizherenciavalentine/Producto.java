@@ -58,7 +58,8 @@ public class Producto {
         this.Fechas = Trazabilidad;
     }
 private HashMap<String,FechaDePaso> Trazabilidad(){
-    System.out.println("");
+    //Aqui imprime en pantalla la ruta del producto basandose en el atributo de fechas que guarda las informaciones
+    
           
     return this.Fechas;
 }
