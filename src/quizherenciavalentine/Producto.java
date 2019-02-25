@@ -17,13 +17,13 @@ public class Producto {
     private String nombre;
     private double precio;
     private HashMap<String,Producto>materiaprimarequerida;
-    private HashMap<String,FechaDePaso> Trazabilidad;
+    private HashMap<String,FechaDePaso> Fechas;
 
-    public Producto(String nombre, double precio, HashMap<String, Producto> materiaprimarequerida, HashMap<String, FechaDePaso> Trazabilidad) {
+    public Producto(String nombre, double precio, HashMap<String, Producto> materiaprimarequerida, HashMap<String, FechaDePaso> Fechas) {
         this.nombre = nombre;
         this.precio = precio;
         this.materiaprimarequerida = materiaprimarequerida;
-        this.Trazabilidad = Trazabilidad;
+        this.Fechas = Fechas;
     }
 
     public String getNombre() {
@@ -50,12 +50,16 @@ public class Producto {
         this.materiaprimarequerida = materiaprimarequerida;
     }
 
-    public HashMap<String, FechaDePaso> getTrazabilidad() {
-        return Trazabilidad;
+    public HashMap<String, FechaDePaso> getFechas() {
+        return Fechas;
     }
 
-    public void setTrazabilidad(HashMap<String, FechaDePaso> Trazabilidad) {
-        this.Trazabilidad = Trazabilidad;
+    public void setFechas(HashMap<String, FechaDePaso> Trazabilidad) {
+        this.Fechas = Trazabilidad;
     }
-
+private HashMap<String,FechaDePaso> Trazabilidad(){
+    System.out.println("");
+          
+    return this.Fechas;
+}
 }
