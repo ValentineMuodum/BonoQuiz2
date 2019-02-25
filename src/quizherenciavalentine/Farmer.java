@@ -16,7 +16,8 @@ public class Farmer extends Eslabon{
 
     @Override
     public Eslabon LugarDeEnvio(Producto producto) {
-       return this.productosquecultiva<producto.get>
+        
+        return this.productosquecultiva.get(producto.getNombre()).getFechas();
     }
 
   
