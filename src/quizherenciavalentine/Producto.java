@@ -19,13 +19,14 @@ public class Producto {
     private HashMap<String,Producto>materiaprimarequerida;
     private HashMap<String,FechaDePaso> Fechas;
 
-    public Producto(String nombre, double precio, HashMap<String, Producto> materiaprimarequerida, HashMap<String, FechaDePaso> Fechas) {
+    public Producto(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.materiaprimarequerida = materiaprimarequerida;
-        this.Fechas = Fechas;
     }
-
+ public Producto(String nombre) {
+        this.nombre = nombre;
+        
+    }
     public String getNombre() {
         return nombre;
     }

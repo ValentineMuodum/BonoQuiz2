@@ -14,16 +14,14 @@ import java.util.ArrayList;
 public abstract class  Eslabon {
     private String nombre;
     private String descripcion;
-    private double[] direccion;
+    private ArrayList direccion;
 
     public Eslabon(String nombre, String descripcion,double latitud,double longitud) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.direccion=new double[2];
-       this.direccion[1]=latitud;
-       this.direccion[2]=longitud;
+        direccion.add(0,latitud);
+        direccion.add(1,longitud);
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -40,14 +38,16 @@ public abstract class  Eslabon {
         this.descripcion = descripcion;
     }
 
-    public double[] getDireccion() {
+    public ArrayList getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(double[] direccion) {
+    public void setDireccion(ArrayList direccion) {
         this.direccion = direccion;
     }
 
-public abstract Eslabon LugarDeEnvio();
-public abstract void EnviarProducto();
+  
+
+public abstract Eslabon LugarDeEnvio(Producto producto,String fecha);
+public abstract void EnviarProducto(Producto producto,String fecha,Eslabon m);
 }

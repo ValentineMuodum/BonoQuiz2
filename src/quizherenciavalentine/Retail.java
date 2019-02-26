@@ -14,11 +14,18 @@ import java.util.HashMap;
 public class Retail extends Eslabon{
     private HashMap<String,Producto>productos;
 
-    public Retail(HashMap<String, Producto> productos, String nombre, String descripcion, double latitud, double longitud) {
+    public Retail( String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
-        this.productos = productos;
+      
     }
-
+private Producto CrearProductoR(String Nombre,String Fecha,double precio,Retail r){
+      Producto p=new Producto(Nombre,precio);
+      FechaDePaso a=new FechaDePaso(Fecha, r);
+      p.getFechas().put(Fecha, a);
+      this.productos.put(p.getNombre(),p);
+      return  p;
+      
+  } 
     public HashMap<String, Producto> getProductos() {
         return productos;
     }
@@ -26,5 +33,16 @@ public class Retail extends Eslabon{
     public void setProductos(HashMap<String, Producto> productos) {
         this.productos = productos;
     }
+@Override
+    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
+     return productos.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
+    }
 
+  
+  @Override
+    public void EnviarProducto(Producto producto,String fecha,Eslabon m) {
+    productos.get(producto.getNombre()).getFechas().get(fecha).setFecha(fecha);
+    productos.get(producto.getNombre()).getFechas().get(fecha).setLugardeproceso(m);
+    
+    }
 }

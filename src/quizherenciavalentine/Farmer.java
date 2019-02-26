@@ -14,21 +14,10 @@ import java.util.HashMap;
 public class Farmer extends Eslabon{
     private HashMap<String,Producto>productosquecultiva;
 
-    @Override
-    public Eslabon LugarDeEnvio(Producto producto) {
-        
-        return this.productosquecultiva.get(producto.getNombre()).getFechas();
-    }
 
-  
-    @Override
-    public void EnviarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Farmer(HashMap<String, Producto> productosquecultiva, String nombre, String descripcion, double latitud, double longitud) {
+    public Farmer( String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
-        this.productosquecultiva = productosquecultiva;
+   
     }
 
     public HashMap<String, Producto> getProductosquecultiva() {
@@ -38,5 +27,30 @@ public class Farmer extends Eslabon{
     public void setProductosquecultiva(HashMap<String, Producto> productosquecultiva) {
         this.productosquecultiva = productosquecultiva;
     }
+
+  private Producto CrearProductoF(String Nombre,String Fecha,Farmer f){
+      Producto p=new Producto(Nombre);
+      
+      FechaDePaso a=new FechaDePaso(Fecha, f);
+      p.getFechas().put(Fecha, a);
+      this.productosquecultiva.put(p.getNombre(),p);
+      return  p;
+  } 
+          @Override
+    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
+     return productosquecultiva.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
+    }
+
+  
+  @Override
+    public void EnviarProducto(Producto producto,String fecha,Eslabon m) {
+   
+    productosquecultiva.get(producto.getNombre()).getFechas().get(fecha).setFecha(fecha);
+    productosquecultiva.get(producto.getNombre()).getFechas().get(fecha).setLugardeproceso(m);
+    
+    }
+   
+
+  
     
 }

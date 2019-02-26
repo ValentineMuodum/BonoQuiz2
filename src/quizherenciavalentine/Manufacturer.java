@@ -14,11 +14,31 @@ import java.util.HashMap;
 public class Manufacturer extends Eslabon{
     private HashMap<String,Producto>productosqueproduce;
 
-    public Manufacturer(HashMap<String, Producto> productosqueproduce, String nombre, String descripcion, double latitud, double longitud) {
+    public Manufacturer(String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
-        this.productosqueproduce = productosqueproduce;
+        
+    }
+@Override
+    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
+     return productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
     }
 
+  
+  @Override
+    public void EnviarProducto(Producto producto,String fecha,Eslabon m) {
+    productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).setFecha(fecha);
+    productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).setLugardeproceso(m);
+     }
+     private Producto CrearProductoM(String Nombre,String Fecha,Manufacturer m,HashMap<String,Producto>materiausada){
+      Producto p=new Producto(Nombre);
+      
+      FechaDePaso a=new FechaDePaso(Fecha, m);
+      p.setMateriaprimarequerida(materiausada);
+      p.getFechas().put(Fecha, a);
+      this.productosqueproduce.put(p.getNombre(),p);
+      return  p;
+      
+  } 
     public HashMap<String, Producto> getProductosqueproduce() {
         return productosqueproduce;
     }
