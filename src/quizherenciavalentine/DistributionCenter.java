@@ -26,20 +26,31 @@ public class DistributionCenter extends Eslabon {
     public void setProductos(HashMap<String, Producto> Productos) {
         this.Productos = Productos;
     }
-
+ public Producto CrearProductoDC(String ID,String Nombre,String Fecha,DistributionCenter DC){
+      Producto p=new Producto(Nombre,ID);
+      
+      FechaDePaso a=new FechaDePaso(Fecha, DC);
+      
+      p.getFechas().put(Fecha, a);
+      this.Productos.put(ID,p);
+      return  p;
+      
+  } 
     
-   @Override
-    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
-     return Productos.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
-    }
-
-  
-  @Override
-   public void EnviarProducto(Producto producto,String FechaDeExpedicion,String fechasalida,Eslabon m) {
+ @Override
+    public Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m) {
    
-    Productos.get(producto.getNombre()).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
-    Productos.get(producto.getNombre()).getFechas().get(fechasalida).setLugardeproceso(m);
+    Productos.get(ID).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
+    Productos.get(ID).getFechas().get(FechaDeExpedicion).setLugardeproceso(m);
+     Retail y = (Retail) m;
+     HashMap<String,Producto>A=new HashMap<>();
     
+   y.getProductos().put(ID,y.CrearProductoR(ID,Productos.get(ID).getNombre(),fechasalida,0,y));
+    m=y;
+    return m;
+    } 
+ @Override
+    public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
+     return Productos.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
-   
 }

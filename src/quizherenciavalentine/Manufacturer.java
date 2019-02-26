@@ -26,21 +26,22 @@ public class Manufacturer extends Eslabon{
      DistributionCenter y = (DistributionCenter) m;
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductos().put(fechasalida,productosqueproduce.get(ID));
+   y.getProductos().put(ID,y.CrearProductoDC(ID,productosqueproduce.get(ID).getNombre(),fechasalida,y));
     m=y;
     return m;
-    } @Override
+    } 
+ @Override
     public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
      return productosqueproduce.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
    
      public Producto CrearProductoM(String ID,String Nombre,String Fecha,Manufacturer m,HashMap<String,Producto>materiausada){
-      Producto p=new Producto(ID,Nombre);
+      Producto p=new Producto(Nombre,ID);
       
       FechaDePaso a=new FechaDePaso(Fecha, m);
       p.setMateriaprimarequerida(materiausada);
       p.getFechas().put(Fecha, a);
-      this.productosqueproduce.put(p.getNombre(),p);
+      this.productosqueproduce.put(ID,p);
       return  p;
       
   } 

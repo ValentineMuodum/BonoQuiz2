@@ -33,7 +33,7 @@ public class Farmer extends Eslabon{
       Producto p=new Producto(Nombre,ID);
       FechaDePaso a=new FechaDePaso(Fecha, f);
       p.getFechas().put(Fecha, a);
-      this.productosquecultiva.put(p.getID(),p);
+      this.productosquecultiva.put(ID,p);
       return  p;
   } 
          
@@ -45,8 +45,9 @@ public class Farmer extends Eslabon{
      Manufacturer y = (Manufacturer) m;
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductosqueproduce().put(fechasalida,y.CrearProductoM(ID,productosquecultiva.get(ID).getNombre(),fechasalida,y,A));
-    m=y;
+   y.getProductosqueproduce().put(ID,y.CrearProductoM(ID,productosquecultiva.get(ID).getNombre(),fechasalida,y,A));
+    
+   m=y;
     return m;
     } @Override
     public Eslabon LugarDondeSeEnvio(String ID,String fecha) {

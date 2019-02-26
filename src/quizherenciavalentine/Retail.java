@@ -18,11 +18,11 @@ public class Retail extends Eslabon{
         super(nombre, descripcion, latitud, longitud);
       
     }
-public Producto CrearProductoR(String Nombre,String Fecha,double precio,Retail r){
-      Producto p=new Producto(Nombre,precio);
+public Producto CrearProductoR(String ID,String Nombre,String Fecha,double precio,Retail r){
+      Producto p=new Producto(Nombre,precio,ID);
       FechaDePaso a=new FechaDePaso(Fecha, r);
       p.getFechas().put(Fecha, a);
-      this.productos.put(p.getNombre(),p);
+      this.productos.put(ID,p);
       return  p;
       
   } 
@@ -33,18 +33,24 @@ public Producto CrearProductoR(String Nombre,String Fecha,double precio,Retail r
     public void setProductos(HashMap<String, Producto> productos) {
         this.productos = productos;
     }
-@Override
-    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
-     return productos.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
-    }
 
-  
-  @Override
-    public void EnviarProducto(Producto producto,String FechaDeExpedicion,String fechasalida,Eslabon m) {
+    //Para estos dos ultimos metodos supuse que una tienda le envia a otra tienda para no perder la
+    //caracteristica abstracta de la clase Eslabon
+    @Override
+    public Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m) {
    
-    productos.get(producto.getNombre()).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
-    productos.get(producto.getNombre()).getFechas().get(fechasalida).setLugardeproceso(m);
+    productos.get(ID).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
+    productos.get(ID).getFechas().get(FechaDeExpedicion).setLugardeproceso(m);
+     Retail y = (Retail) m;
+     HashMap<String,Producto>A=new HashMap<>();
     
+   y.getProductos().put(ID,y.CrearProductoR(ID,productos.get(ID).getNombre(),fechasalida,productos.get(ID).getPrecio(),y));
+    m=y;
+    return m;
+    } 
+ @Override
+    public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
+     return productos.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
    
 }
