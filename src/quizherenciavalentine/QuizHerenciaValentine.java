@@ -26,7 +26,7 @@ public class QuizHerenciaValentine {
     Retail Tienda=new Retail("Tiendita", "Supermercado", 54,123);
     Granjita.CrearProductoF("Tomate","26/02/2019",Granjita,"123456");
     Granjita.CrearProductoF("Trigo","26/02/2019",Granjita,"1234567");
-        System.out.println(Granjita.getProductosquecultiva().get("1234567").getFechas().get("26/02/2019").getLugardeproceso().getNombre());
+    System.out.println(Granjita.getProductosquecultiva().get("1234567").getFechas().get("26/02/2019").getLugardeproceso().getNombre());
     Granjita.EnviarProducto("123456", "29/02/2019",Fabrica);
     Granjita.EnviarProducto("1234567", "29/02/2019",  Fabrica);
     System.out.println(Granjita.LugarDondeSeEnvio("123456", "29/02/2019").getNombre());
