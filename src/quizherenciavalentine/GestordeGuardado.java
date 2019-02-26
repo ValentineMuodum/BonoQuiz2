@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @author ancardenas
  */
 public class GestordeGuardado {
-    HashMap<String,Producto>productonecesarios;
+    HashMap<String,Producto>productonecesarios=new HashMap<>();
     File file;
     PrintStream escribir;
 

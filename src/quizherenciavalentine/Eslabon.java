@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public abstract class  Eslabon {
     private String nombre;
     private String descripcion;
-    private ArrayList direccion;
+    private ArrayList direccion=new ArrayList();
 
     public Eslabon(String nombre, String descripcion,double latitud,double longitud) {
         this.nombre = nombre;
@@ -48,6 +48,6 @@ public abstract class  Eslabon {
 
   
 
-public abstract Eslabon LugarDeEnvio(Producto producto,String fecha);
-public abstract void EnviarProducto(Producto producto,String fecha,Eslabon m);
+public abstract Eslabon LugarDondeSeEnvio(String ID,String fecha);
+public abstract Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m);
 }

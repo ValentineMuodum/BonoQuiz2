@@ -2,6 +2,7 @@ package quizherenciavalentine;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,17 +17,29 @@ import java.util.HashMap;
 public class Producto {
     private String nombre;
     private double precio;
-    private HashMap<String,Producto>materiaprimarequerida;
-    private HashMap<String,FechaDePaso> Fechas;
+    private HashMap<String,Producto>materiaprimarequerida=new HashMap<>();
+    private HashMap<String,FechaDePaso> Fechas=new HashMap<>();
+    private String ID;
 
-    public Producto(String nombre, double precio) {
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public Producto(String nombre, double precio, String ID) {
         this.nombre = nombre;
         this.precio = precio;
+        this.ID = ID;
     }
- public Producto(String nombre) {
+
+    public Producto(String nombre, String ID) {
         this.nombre = nombre;
-        
+        this.ID = ID;
     }
+    
     public String getNombre() {
         return nombre;
     }
@@ -58,10 +71,9 @@ public class Producto {
     public void setFechas(HashMap<String, FechaDePaso> Trazabilidad) {
         this.Fechas = Trazabilidad;
     }
-private HashMap<String,FechaDePaso> Trazabilidad(){
+public HashMap<String,FechaDePaso> Trazabilidad(){
     //Aqui imprime en pantalla la ruta del producto basandose en el atributo de fechas que guarda las informaciones
     
-          
     return this.Fechas;
 }
 }

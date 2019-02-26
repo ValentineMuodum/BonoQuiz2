@@ -13,10 +13,18 @@ import java.util.HashMap;
  */
 public class DistributionCenter extends Eslabon {
 
-    HashMap<String,Producto>Productos;
+    HashMap<String,Producto>Productos=new HashMap<>();
          
     public DistributionCenter(String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
+    }
+
+    public HashMap<String, Producto> getProductos() {
+        return Productos;
+    }
+
+    public void setProductos(HashMap<String, Producto> Productos) {
+        this.Productos = Productos;
     }
 
     
@@ -27,9 +35,11 @@ public class DistributionCenter extends Eslabon {
 
   
   @Override
-    public void EnviarProducto(Producto producto,String fecha,Eslabon m) {
-    Productos.get(producto.getNombre()).getFechas().get(fecha).setFecha(fecha);
-    Productos.get(producto.getNombre()).getFechas().get(fecha).setLugardeproceso(m);
+   public void EnviarProducto(Producto producto,String FechaDeExpedicion,String fechasalida,Eslabon m) {
+   
+    Productos.get(producto.getNombre()).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
+    Productos.get(producto.getNombre()).getFechas().get(fechasalida).setLugardeproceso(m);
     
     }
+   
 }

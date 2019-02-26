@@ -12,25 +12,30 @@ import java.util.HashMap;
  * @author ancardenas
  */
 public class Manufacturer extends Eslabon{
-    private HashMap<String,Producto>productosqueproduce;
+    private HashMap<String,Producto>productosqueproduce=new HashMap<>();
 
     public Manufacturer(String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
         
     }
 @Override
-    public Eslabon LugarDeEnvio(Producto producto,String fecha) {
-     return productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).getLugardeproceso();
+    public Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m) {
+   
+    productosqueproduce.get(ID).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
+    productosqueproduce.get(ID).getFechas().get(FechaDeExpedicion).setLugardeproceso(m);
+     DistributionCenter y = (DistributionCenter) m;
+     HashMap<String,Producto>A=new HashMap<>();
+    
+   y.getProductos().put(fechasalida,productosqueproduce.get(ID));
+    m=y;
+    return m;
+    } @Override
+    public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
+     return productosqueproduce.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
-
-  
-  @Override
-    public void EnviarProducto(Producto producto,String fecha,Eslabon m) {
-    productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).setFecha(fecha);
-    productosqueproduce.get(producto.getNombre()).getFechas().get(fecha).setLugardeproceso(m);
-     }
-     private Producto CrearProductoM(String Nombre,String Fecha,Manufacturer m,HashMap<String,Producto>materiausada){
-      Producto p=new Producto(Nombre);
+   
+     public Producto CrearProductoM(String ID,String Nombre,String Fecha,Manufacturer m,HashMap<String,Producto>materiausada){
+      Producto p=new Producto(ID,Nombre);
       
       FechaDePaso a=new FechaDePaso(Fecha, m);
       p.setMateriaprimarequerida(materiausada);
