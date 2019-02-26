@@ -49,5 +49,5 @@ public abstract class  Eslabon {
   
 
 public abstract Eslabon LugarDondeSeEnvio(String ID,String fecha);
-public abstract Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m);
+public abstract Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m);
 }

@@ -38,14 +38,14 @@ public class Farmer extends Eslabon{
   } 
          
   @Override
-    public Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m) {
+    public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
    
-    productosquecultiva.get(ID).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
-    productosquecultiva.get(ID).getFechas().get(FechaDeExpedicion).setLugardeproceso(m);
-     Manufacturer y = (Manufacturer) m;
+  Manufacturer y = (Manufacturer) m;
+    FechaDePaso f=new FechaDePaso(fechasalida,y);
+    productosquecultiva.get(ID).getFechas().put(fechasalida,f); 
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductosqueproduce().put(ID,y.CrearProductoM(ID,productosquecultiva.get(ID).getNombre(),fechasalida,y,A));
+   y.getProductosrecibidos().put(ID,y.CrearProductoM(ID,productosquecultiva.get(ID).getNombre(),fechasalida,y,A));
     
    m=y;
     return m;

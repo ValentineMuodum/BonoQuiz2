@@ -13,7 +13,8 @@ import java.util.HashMap;
  */
 public class DistributionCenter extends Eslabon {
 
-    HashMap<String,Producto>Productos=new HashMap<>();
+   private HashMap<String,Producto>Productos=new HashMap<>();
+   private HashMap<String,Producto>productosrecibidos=new HashMap<>();
          
     public DistributionCenter(String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
@@ -21,6 +22,14 @@ public class DistributionCenter extends Eslabon {
 
     public HashMap<String, Producto> getProductos() {
         return Productos;
+    }
+
+    public HashMap<String, Producto> getProductosrecibidos() {
+        return productosrecibidos;
+    }
+
+    public void setProductosrecibidos(HashMap<String, Producto> productosrecibidos) {
+        this.productosrecibidos = productosrecibidos;
     }
 
     public void setProductos(HashMap<String, Producto> Productos) {
@@ -38,14 +47,13 @@ public class DistributionCenter extends Eslabon {
   } 
     
  @Override
-    public Eslabon EnviarProducto(String ID,String fechasalida,String FechaDeExpedicion,Eslabon m) {
-   
-    Productos.get(ID).getFechas().get(FechaDeExpedicion).setFecha(fechasalida);
-    Productos.get(ID).getFechas().get(FechaDeExpedicion).setLugardeproceso(m);
-     Retail y = (Retail) m;
+    public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
+    Retail y = (Retail) m;
+    FechaDePaso f=new FechaDePaso(fechasalida,y);
+    Productos.get(ID).getFechas().put(fechasalida,f); 
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductos().put(ID,y.CrearProductoR(ID,Productos.get(ID).getNombre(),fechasalida,0,y));
+   y.getProductosrecibidos().put(ID,y.CrearProductoR(ID,Productos.get(ID).getNombre(),fechasalida,0,y));
     m=y;
     return m;
     } 
