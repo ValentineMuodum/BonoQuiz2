@@ -24,7 +24,8 @@ public class QuizHerenciaValentine {
         Solo se podran enviar productos que hayan sido creados en el eslabon siguiendo la logica del ejercicio
         
          La trazabilidad esta como un atributo de cada objeto llamado Fechas donde se guarda la informacion
-         de todos los procesos que ocurrieron con el producto ya sea, fabricacion, envio,etc el metodo trazabilidad solo imprime en pantalla.
+         de todos los procesos que ocurrieron con el producto ya sea, fabricacion, envio,etc el metodo trazabilidad solo imprime en pantalla y devuelve un hashamap 
+        de fechas.
          El metodo de guardar guardara como primer elemento la id del objeto, luego su nombre y luego todos los 
         procesos que atraveso, cada objeto estara separado por un espacio
         Para evitar conflictos de HashMap se debe especificar la fecha y hora 
