@@ -51,11 +51,12 @@ public class Manufacturer extends Eslabon{
         /**/
         FechaDePaso a=new FechaDePaso(Fecha, m,"Se creo el producto "+Nombre+" con identificador "+ID+ " el dia "+Fecha+" con los elementos "+desc);
         materiausada.entrySet().forEach((entry) -> {
-            FechaDePaso r=new FechaDePaso(Fecha, this, "Fue usado para crear "+p.getNombre()+" el dia "+Fecha);
+            FechaDePaso r=new FechaDePaso(Fecha, this, "Fue usado para crear "+p.getNombre()+" con ID "+ID+" el dia "+Fecha+" en la manufactura "+this.getNombre());
             String key = entry.getKey();
             Producto value;
             value = entry.getValue();
             value.getFechas().put(Fecha, r);
+           
         });
         p.setMateriaprimarequerida(materiausada);
         p.getFechas().put(Fecha, a);

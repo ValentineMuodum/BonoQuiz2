@@ -34,7 +34,7 @@ public class Farmer extends Eslabon{
   public Producto CrearProductoF(String Nombre,String Fecha,Farmer f,String ID){
       Producto p=new Producto(Nombre,ID);
       FechaDePaso a;
-     a = new FechaDePaso(Fecha, f,"Se creo el producto en "+f.getNombre()+" con  ID"+ID+ "el dia "+Fecha);
+     a = new FechaDePaso(Fecha, f,"Se creo el producto "+Nombre+ " en "+f.getNombre()+" con  ID "+ID+ " el dia "+Fecha);
       p.getFechas().put(Fecha, a);
       this.productosquecultiva.put(ID,p);
       return  p;
@@ -44,8 +44,8 @@ public class Farmer extends Eslabon{
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
    
   Manufacturer y = (Manufacturer) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y,"El producto salio de la Granja "+this.getNombre()+" el dia "+fechasalida+
-             "y llego a la Manufactura "+y.getNombre());
+    FechaDePaso f=new FechaDePaso(fechasalida,y,"El producto "+this.getProductosquecultiva().get(ID).getNombre()+" salio de la Granja "+this.getNombre()+" el dia "+fechasalida+
+             " y llego a la Manufactura "+y.getNombre());
     productosquecultiva.get(ID).getFechas().put(fechasalida,f); 
     y.getProductosrecibidos().put(ID, productosquecultiva.get(ID));
      

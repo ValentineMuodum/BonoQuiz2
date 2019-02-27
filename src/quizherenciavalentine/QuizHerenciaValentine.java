@@ -41,7 +41,8 @@ public class QuizHerenciaValentine {
     System.out.println(Granjita.LugarDondeSeEnvio("123456", "29/02/2019").getNombre());
     System.out.println(Fabrica.getProductosrecibidos().get("123456").getNombre());
     Fabrica.CrearProductoM("98765", "Pizza", "2/03/2019", Fabrica, Fabrica.getProductosrecibidos());
-        
+    Fabrica.getProductosqueproduce().get("98765").Trazabilidad();
+    Fabrica.getProductosrecibidos().get("123456").Trazabilidad();
     }
     
 }
