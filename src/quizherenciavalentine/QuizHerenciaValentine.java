@@ -30,6 +30,7 @@ public class QuizHerenciaValentine {
         Cada clase llevara un registro de sus objetos por lo que no se eliminaran objetos cuando se envien
          El metodo de guardar guardara como primer elemento la id del objeto, luego su nombre y luego todos los 
         procesos que atraveso, cada objeto estara separado por un espacio
+        Cada producto tiene un HashMap con los productos que se usaron para su creacion 
         Para evitar conflictos de HashMap se debe especificar la fecha y hora 
         La informacion de fechas no es mostrada secuencialmente por el metodo usado para listar
         Para ver la informacion en el archivo se debe abrir el archivo "Guardar.txt" desde el apartado de archivos y no desde 
