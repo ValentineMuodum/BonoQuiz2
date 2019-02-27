@@ -6,30 +6,29 @@
 package quizherenciavalentine;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.time.Clock;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ancardenas
  */
 public class GestordeGuardado {
-    HashMap<String,Producto>productonecesarios=new HashMap<>();
+   
     File file;
     PrintStream escribir;
 
-    public GestordeGuardado(HashMap<String, Producto> productonecesarios, File file, PrintStream escribir) {
-        this.productonecesarios = productonecesarios;
+    public GestordeGuardado(File file) {
         this.file = file;
-        this.escribir = escribir;
-    }
-
-    public HashMap<String, Producto> getProductonecesarios() {
-        return productonecesarios;
-    }
-
-    public void setProductonecesarios(HashMap<String, Producto> productonecesarios) {
-        this.productonecesarios = productonecesarios;
+        try {
+            this.escribir = new PrintStream(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GestordeGuardado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public File getFile() {
@@ -48,4 +47,18 @@ public class GestordeGuardado {
         this.escribir = escribir;
     }
 
+    public  void GuardarTrazabilidad(Producto p){
+        System.out.println("Se guardo la siguiente traza de producto en el archivo ");
+              System.out.print(p.getID()+" "+p.getNombre()+" ");  
+        
+        escribir.print(p.getID()+" ");
+        escribir.print(p.getNombre()+" ");
+        p.Trazabilidad().values().stream().map((values) -> {
+            escribir.print(values.getDescripcionProceso());
+            return values;
+        }).forEachOrdered((_item) -> {
+            escribir.println();
+        });
+        escribir.println();
+    }
 }

@@ -26,7 +26,7 @@ public class Manufacturer extends Eslabon{
    
   DistributionCenter y = (DistributionCenter) m;
     FechaDePaso f=new FechaDePaso(fechasalida,y,"Se envio el producto "+productosqueproduce.get(ID).getNombre()+" desde la manufactura "
-           +this.getNombre()+ "al centro de distribucion "+y.getNombre());
+           +this.getNombre()+ " al centro de distribucion "+y.getNombre());
     productosqueproduce.get(ID).getFechas().put(fechasalida,f); 
      
      

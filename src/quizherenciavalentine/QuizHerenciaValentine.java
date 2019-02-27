@@ -6,6 +6,7 @@
 package quizherenciavalentine;
 
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -28,7 +29,8 @@ public class QuizHerenciaValentine {
         procesos que atraveso, cada objeto estara separado por un espacio
         Para evitar conflictos de HashMap se debe especificar la fecha y hora 
         */
-                
+     File txt=new File("Guardar.txt");
+     GestordeGuardado gestionador=new GestordeGuardado(txt);
     Farmer Granjita=new Farmer("Granjita","Granja productora",20,80);
     Manufacturer Fabrica=new Manufacturer("Fabrica1", "Fabrica de Comida Italiana", 4, 67);
     DistributionCenter centro=new DistributionCenter("Centro","Centro de distribucion",46, 43);
@@ -41,8 +43,14 @@ public class QuizHerenciaValentine {
     System.out.println(Granjita.LugarDondeSeEnvio("123456", "29/02/2019").getNombre());
     System.out.println(Fabrica.getProductosrecibidos().get("123456").getNombre());
     Fabrica.CrearProductoM("98765", "Pizza", "2/03/2019", Fabrica, Fabrica.getProductosrecibidos());
-    Fabrica.getProductosqueproduce().get("98765").Trazabilidad();
     Fabrica.getProductosrecibidos().get("123456").Trazabilidad();
+    Fabrica.EnviarProducto("98765","7/03/2019" , centro);
+    centro.EnviarProducto("98765", "8/03/2019", Tienda);
+    Tienda.PonerAventaProductoR("98765", "10/03/2019", 6000);
+    System.out.println("");
+    gestionador.GuardarTrazabilidad(Granjita.getProductosquecultiva().get("1234567"));
+        System.out.println("");
+    gestionador.GuardarTrazabilidad(Tienda.getProductos().get("98765"));
     }
     
 }

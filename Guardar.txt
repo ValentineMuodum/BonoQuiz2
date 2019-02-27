@@ -1,0 +1,9 @@
+1234567 Trigo Fue usado para crear Pizza con ID 98765 el dia 2/03/2019 en la manufactura Fabrica1
+Se creo el producto Trigo en Granjita con  ID 1234567 el dia 26/02/2019/6:40
+El producto Trigo salio de la Granja Granjita el dia 29/02/2019 y llego a la Manufactura Fabrica1
+
+98765 Pizza Se creo el producto Pizza con identificador 98765 el dia 2/03/2019 con los elementos Tomate,Trigo,
+Se envio el producto Pizza desde la manufactura Fabrica1 al centro de distribucion Centro
+Se envio el producto al establecimiento Tiendita El dia 8/03/2019
+El producto con ID 98765 fue puesto en venta en el establecimiento Tiendita con un precio de 6000.0
+
