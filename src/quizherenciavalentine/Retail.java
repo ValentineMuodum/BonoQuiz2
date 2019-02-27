@@ -19,12 +19,13 @@ public class Retail extends Eslabon{
         super(nombre, descripcion, latitud, longitud);
       
     }
-public Producto CrearProductoR(String ID,String Nombre,String Fecha,double precio,Retail r){
-      Producto p=new Producto(Nombre,precio,ID);
-      FechaDePaso a=new FechaDePaso(Fecha, r);
-      p.getFechas().put(Fecha, a);
-      this.productos.put(ID,p);
-      return  p;
+public Producto PonerAventaProductoR(String ID,String Fecha,double Precio){
+      FechaDePaso f=new FechaDePaso(Fecha, this, "El producto con ID "+ID+" fue puesto en venta en el establecimiento "
+      +this.getNombre()+" con un precio de "+Precio);
+    productosrecibidos.get(ID).getFechas().put(Fecha,f);
+    productos.put(ID,productosrecibidos.get(ID));
+    productos.get(ID).setPrecio(Precio);
+      return  productos.get(ID);
       
   } 
 
@@ -48,13 +49,13 @@ public Producto CrearProductoR(String ID,String Nombre,String Fecha,double preci
     @Override
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
    Retail y = (Retail) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y);
+    FechaDePaso f=new FechaDePaso(fechasalida,y," ");
     productos.get(ID).getFechas().put(fechasalida,f); 
    
     
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductosrecibidos().put(ID,y.CrearProductoR(ID,productos.get(ID).getNombre(),fechasalida,productos.get(ID).getPrecio(),y));
+   y.getProductosrecibidos().put(ID,productos.get(ID));
     m=y;
     return m;
     } 

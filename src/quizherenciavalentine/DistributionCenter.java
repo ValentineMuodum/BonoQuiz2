@@ -45,11 +45,11 @@ public class DistributionCenter extends Eslabon {
  @Override
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
     Retail y = (Retail) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y,"Se envio el producto al establecimiento ");
+    FechaDePaso f=new FechaDePaso(fechasalida,y,"Se envio el producto al establecimiento "+y.getNombre()+" El dia "+fechasalida);
     productosrecibidos.get(ID).getFechas().put(fechasalida,f); 
-     HashMap<String,Producto>A=new HashMap<>();
+     
     
-   y.getProductosrecibidos().put(ID,y.CrearProductoR(ID,productosrecibidos.get(ID).getNombre(),fechasalida,0,y));
+   y.getProductosrecibidos().put(ID,productosrecibidos.get(ID));
    
    m=y;
     return m;
