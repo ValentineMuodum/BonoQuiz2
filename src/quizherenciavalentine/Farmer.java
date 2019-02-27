@@ -7,6 +7,8 @@ package quizherenciavalentine;
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +33,8 @@ public class Farmer extends Eslabon{
 
   public Producto CrearProductoF(String Nombre,String Fecha,Farmer f,String ID){
       Producto p=new Producto(Nombre,ID);
-      FechaDePaso a=new FechaDePaso(Fecha, f);
+      FechaDePaso a;
+     a = new FechaDePaso(Fecha, f,"Se creo el producto en "+f.getNombre()+" con  ID"+ID+ "el dia "+Fecha);
       p.getFechas().put(Fecha, a);
       this.productosquecultiva.put(ID,p);
       return  p;
@@ -41,15 +44,13 @@ public class Farmer extends Eslabon{
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
    
   Manufacturer y = (Manufacturer) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y);
+    FechaDePaso f=new FechaDePaso(fechasalida,y,"El producto salio de la Granja "+this.getNombre()+" el dia "+fechasalida+
+             "y llego a la Manufactura "+y.getNombre());
     productosquecultiva.get(ID).getFechas().put(fechasalida,f); 
-     HashMap<String,Producto>A=new HashMap<>();
-    
-   y.getProductosrecibidos().put(ID,y.CrearProductoM(ID,productosquecultiva.get(ID).getNombre(),fechasalida,y,A));
-    
-   m=y;
-    return m;
-    } @Override
+    y.getProductosrecibidos().put(ID, productosquecultiva.get(ID));
+     
+    return m;}
+    @Override
     public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
      return productosquecultiva.get(ID).getFechas().get(fecha).getLugardeproceso();
     }

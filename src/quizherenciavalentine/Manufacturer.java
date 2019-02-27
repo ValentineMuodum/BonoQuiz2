@@ -5,7 +5,10 @@
  */
 package quizherenciavalentine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -22,13 +25,15 @@ public class Manufacturer extends Eslabon{
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
    
   DistributionCenter y = (DistributionCenter) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y);
+    FechaDePaso f=new FechaDePaso(fechasalida,y,"Se envio el producto "+productosqueproduce.get(ID).getNombre()+" desde la manufactura "
+           +this.getNombre()+ "al centro de distribucion "+y.getNombre());
     productosqueproduce.get(ID).getFechas().put(fechasalida,f); 
      
-     HashMap<String,Producto>A=new HashMap<>();
-    
+     
+    /*No es necesaria esta linea
    y.getProductosrecibidos().put(ID,y.CrearProductoDC(ID,productosqueproduce.get(ID).getNombre(),fechasalida,y));
-    m=y;
+   */y.getProductosrecibidos().put(ID,productosqueproduce.get(ID));
+   m=y;
     return m;
     } 
  @Override
@@ -38,8 +43,12 @@ public class Manufacturer extends Eslabon{
    
      public Producto CrearProductoM(String ID,String Nombre,String Fecha,Manufacturer m,HashMap<String,Producto>materiausada){
       Producto p=new Producto(Nombre,ID);
+      String desc="";
+        for(Producto value:materiausada.values()){
+         desc=desc+value.getNombre()+",";
+                 }
       
-      FechaDePaso a=new FechaDePaso(Fecha, m);
+        FechaDePaso a=new FechaDePaso(Fecha, m,"Se creo el producto "+Nombre+" el dia "+Fecha+" con los elementos "+desc);
       p.setMateriaprimarequerida(materiausada);
       p.getFechas().put(Fecha, a);
       this.productosqueproduce.put(ID,p);

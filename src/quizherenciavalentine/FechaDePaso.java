@@ -12,10 +12,19 @@ package quizherenciavalentine;
 public class FechaDePaso {
   private String fecha;
 private Eslabon lugardeproceso; 
-
-    public FechaDePaso(String fecha, Eslabon lugardeproceso) {
+private String DescripcionProceso;
+    public FechaDePaso(String fecha, Eslabon lugardeproceso,String Descripcion) {
         this.fecha = fecha;
         this.lugardeproceso = lugardeproceso;
+        this.DescripcionProceso=Descripcion;
+    }
+
+    public String getDescripcionProceso() {
+        return DescripcionProceso;
+    }
+
+    public void setDescripcionProceso(String DescripcionProceso) {
+        this.DescripcionProceso = DescripcionProceso;
     }
 
     public String getFecha() {

@@ -13,16 +13,14 @@ import java.util.HashMap;
  */
 public class DistributionCenter extends Eslabon {
 
-   private HashMap<String,Producto>Productos=new HashMap<>();
+
    private HashMap<String,Producto>productosrecibidos=new HashMap<>();
          
     public DistributionCenter(String nombre, String descripcion, double latitud, double longitud) {
         super(nombre, descripcion, latitud, longitud);
     }
 
-    public HashMap<String, Producto> getProductos() {
-        return Productos;
-    }
+ 
 
     public HashMap<String, Producto> getProductosrecibidos() {
         return productosrecibidos;
@@ -32,33 +30,32 @@ public class DistributionCenter extends Eslabon {
         this.productosrecibidos = productosrecibidos;
     }
 
-    public void setProductos(HashMap<String, Producto> Productos) {
-        this.Productos = Productos;
-    }
+   /*No es necesario este metodo ya que esta clase solo envia lo que recibe
  public Producto CrearProductoDC(String ID,String Nombre,String Fecha,DistributionCenter DC){
       Producto p=new Producto(Nombre,ID);
       
       FechaDePaso a=new FechaDePaso(Fecha, DC);
       
       p.getFechas().put(Fecha, a);
-      this.Productos.put(ID,p);
+      this.productosrecibidos.put(ID,p);
       return  p;
       
-  } 
+  } */
     
  @Override
     public Eslabon EnviarProducto(String ID,String fechasalida,Eslabon m) {
     Retail y = (Retail) m;
-    FechaDePaso f=new FechaDePaso(fechasalida,y);
-    Productos.get(ID).getFechas().put(fechasalida,f); 
+    FechaDePaso f=new FechaDePaso(fechasalida,y,"Se envio el producto al establecimiento ");
+    productosrecibidos.get(ID).getFechas().put(fechasalida,f); 
      HashMap<String,Producto>A=new HashMap<>();
     
-   y.getProductosrecibidos().put(ID,y.CrearProductoR(ID,Productos.get(ID).getNombre(),fechasalida,0,y));
-    m=y;
+   y.getProductosrecibidos().put(ID,y.CrearProductoR(ID,productosrecibidos.get(ID).getNombre(),fechasalida,0,y));
+   
+   m=y;
     return m;
     } 
  @Override
     public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
-     return Productos.get(ID).getFechas().get(fecha).getLugardeproceso();
+     return productosrecibidos.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
 }
