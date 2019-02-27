@@ -22,13 +22,18 @@ public class QuizHerenciaValentine {
         /* la fecha de expedicion para los productos que fueron enviados sera el momento en que el producto llego, en estos casos 
         coincide con la fecha de salida del producto en el anterior eslabon
         Solo se podran enviar productos que hayan sido creados en el eslabon siguiendo la logica del ejercicio
-        
+            Los objetos son creados de los eslabones que tienen esta funcion (Farmer y Manufacturer
          La trazabilidad esta como un atributo de cada objeto llamado Fechas donde se guarda la informacion
          de todos los procesos que ocurrieron con el producto ya sea, fabricacion, envio,etc el metodo trazabilidad solo imprime en pantalla y devuelve un hashamap 
-        de fechas.
+        de fechas. Cabe decir que si se puede acceder por medio de la fecha a la descripcion del proceso,
+        el eslabon y la fecha, de manera que si el cliente quiere conocer la trazabilidad solo debera acceder a su arreglo de productos
+        Cada clase llevara un registro de sus objetos por lo que no se eliminaran objetos cuando se envien
          El metodo de guardar guardara como primer elemento la id del objeto, luego su nombre y luego todos los 
         procesos que atraveso, cada objeto estara separado por un espacio
         Para evitar conflictos de HashMap se debe especificar la fecha y hora 
+        La informacion de fechas no es mostrada secuencialmente por el metodo usado para listar
+        Para ver la informacion en el archivo se debe abrir el archivo "Guardar.txt" desde el apartado de archivos y no desde 
+        el paquete de fuentes
         */
      File txt=new File("Guardar.txt");
      GestordeGuardado gestionador=new GestordeGuardado(txt);
@@ -52,6 +57,8 @@ public class QuizHerenciaValentine {
     gestionador.GuardarTrazabilidad(Granjita.getProductosquecultiva().get("1234567"));
         System.out.println("");
     gestionador.GuardarTrazabilidad(Tienda.getProductos().get("98765"));
+        Consumer Pedro=new Consumer("Pedro");
+    Pedro.AdquirirProducto(Tienda, "98765","23/03/2019");
+    gestionador.GuardarTrazabilidad(Pedro.getProductosaadquiridos().get("98765"));
     }
-    
 }
