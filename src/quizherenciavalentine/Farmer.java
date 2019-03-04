@@ -48,17 +48,11 @@ public class Farmer extends Eslabon{
              " y llego a la Manufactura "+y.getNombre());
     productosquecultiva.get(ID).getFechas().put(fechasalida,f); 
     y.getProductosrecibidos().put(ID, productosquecultiva.get(ID));
-     
+     m=y;
     return m;}
     @Override
     public Eslabon LugarDondeSeEnvio(String ID,String fecha) {
      return productosquecultiva.get(ID).getFechas().get(fecha).getLugardeproceso();
     }
-
-  
-  
-   
-
-  
-    
+      
 }

@@ -35,6 +35,12 @@ public class QuizHerenciaValentine {
         La informacion de fechas no es mostrada secuencialmente por el metodo usado para listar
         Para ver la informacion en el archivo se debe abrir el archivo "Guardar.txt" desde el apartado de archivos y no desde 
         el paquete de fuentes
+        
+        Cambios de ultimo minuto
+        En el diagrama de clases gestor de archivos tiene una relacin de dependencia por metodo con la clase producto;
+        en esta version se hace iguala el eslabon a la funcion de enviar producto respectiva
+        por logica de codigo, en la version anterior funciona sin esto pero de esta manera
+        es la forma correcta de hacerlo
         */
      File txt=new File("Guardar.txt");
      GestordeGuardado gestionador=new GestordeGuardado(txt);
@@ -45,14 +51,16 @@ public class QuizHerenciaValentine {
     Granjita.CrearProductoF("Tomate","26/02/2019/6:30",Granjita,"123456");
     Granjita.CrearProductoF("Trigo","26/02/2019/6:40",Granjita,"1234567");
     System.out.println(Granjita.getProductosquecultiva().get("1234567").getFechas().get("26/02/2019/6:40").getLugardeproceso().getNombre());
-    Granjita.EnviarProducto("123456", "29/02/2019",Fabrica);
-    Granjita.EnviarProducto("1234567", "29/02/2019",  Fabrica);
+    Fabrica=(Manufacturer) Granjita.EnviarProducto("123456", "29/02/2019",Fabrica);
+    Fabrica=(Manufacturer)Granjita.EnviarProducto("1234567", "29/02/2019",  Fabrica);
+    
     System.out.println(Granjita.LugarDondeSeEnvio("123456", "29/02/2019").getNombre());
-    System.out.println(Fabrica.getProductosrecibidos().get("123456").getNombre());
+    System.out.println(Fabrica.getProductosrecibidos().get("1234567").getNombre());
     Fabrica.CrearProductoM("98765", "Pizza", "2/03/2019", Fabrica, Fabrica.getProductosrecibidos());
     Fabrica.getProductosrecibidos().get("123456").Trazabilidad();
-    Fabrica.EnviarProducto("98765","7/03/2019" , centro);
-    centro.EnviarProducto("98765", "8/03/2019", Tienda);
+    centro=(DistributionCenter) Fabrica.EnviarProducto("98765","7/03/2019" , centro);
+    
+    Tienda=(Retail) centro.EnviarProducto("98765", "8/03/2019", Tienda);
     Tienda.PonerAventaProductoR("98765", "10/03/2019", 6000);
     System.out.println("");
     gestionador.GuardarTrazabilidad(Granjita.getProductosquecultiva().get("1234567"));
@@ -61,5 +69,6 @@ public class QuizHerenciaValentine {
         Consumer Pedro=new Consumer("Pedro");
     Pedro.AdquirirProducto(Tienda, "98765","23/03/2019");
     gestionador.GuardarTrazabilidad(Pedro.getProductosaadquiridos().get("98765"));
+   
     }
 }
